@@ -45,6 +45,10 @@ public class VehicleTableModel implements Serializable {
     int nextFullService;
     @Column(name = "nextOafChange")
     int nextOafChange;
+    @Column(name = "fuel")
+    String fuel;
+    @Column(name = "available")
+    boolean available;
     @ManyToOne
     @JoinColumn(name = "engine_id")
     EngineTableModel engineTableModel;
