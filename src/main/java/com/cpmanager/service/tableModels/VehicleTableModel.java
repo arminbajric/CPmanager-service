@@ -1,5 +1,7 @@
 package com.cpmanager.service.tableModels;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
@@ -10,11 +12,8 @@ import java.util.TreeSet;
 @Entity
 @Table(name="vehicles")
 public class VehicleTableModel implements Serializable {
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 661726483313045824L;
-	@Id
+
+    @Id
     @Column(name="regPlates")
     String regPlates;
     @Column(name = "manufacturer")

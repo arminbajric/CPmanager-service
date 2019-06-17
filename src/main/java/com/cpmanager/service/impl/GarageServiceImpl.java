@@ -48,4 +48,25 @@ public class GarageServiceImpl implements GarageService {
     public List<VehicleTableModel> getAvailableOnesByFuel(boolean available, String fuel) {
         return vehicleRepository.getAllByFuelAndAvailable(fuel, available);
     }
+
+    @Override
+    public void addNewVehicle(VehicleTableModel vehicleTableModel) {
+        vehicleRepository.save(vehicleTableModel);
+
+    }
+
+    @Override
+    public void deleteVehicle(String reg_plates) {
+        vehicleRepository.deleteVehicleTableModelByRegPlates(reg_plates);
+    }
+
+    @Override
+    public void updateVehicle(VehicleTableModel model) {
+        vehicleRepository.save(model);
+    }
+
+    @Override
+    public boolean checkForUniqueRegPlates(String reg_plates) {
+        return vehicleRepository.getByRegPlates(reg_plates);
+    }
 }

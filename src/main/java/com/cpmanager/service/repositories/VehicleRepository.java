@@ -3,6 +3,7 @@ package com.cpmanager.service.repositories;
 import com.cpmanager.service.tableModels.CategoryTableModel;
 import com.cpmanager.service.tableModels.VehicleTableModel;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -13,4 +14,6 @@ public List<VehicleTableModel> getAllByCategoryTableModel(CategoryTableModel cat
 public List<VehicleTableModel> getAllByFuel(String fuel);
     public List<VehicleTableModel> getAllByAvailable(boolean available);
     public  List<VehicleTableModel> getAllByFuelAndAvailable(String fuel,boolean available);
+    void deleteVehicleTableModelByRegPlates(String reg_plates);
+    boolean getByRegPlates(String reg_plates);
 }

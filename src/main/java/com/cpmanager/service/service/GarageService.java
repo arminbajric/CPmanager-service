@@ -13,4 +13,8 @@ public interface GarageService {
     List<VehicleTableModel> getByFuel(String fuel);
     List<VehicleTableModel> getAvailableOnes(boolean available);
     List<VehicleTableModel> getAvailableOnesByFuel(boolean available,String fuel);
+    void addNewVehicle(VehicleTableModel vehicleTableModel);
+    void deleteVehicle(String reg_plates);
+  
+    boolean checkForUniqueRegPlates(String reg_plates);
 }
