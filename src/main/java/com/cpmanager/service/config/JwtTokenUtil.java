@@ -1,12 +1,13 @@
 package com.cpmanager.service.config;
 
 
+import com.cpmanager.service.service.UserService;
 import com.cpmanager.service.tableModels.UserTableModel;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
@@ -19,8 +20,14 @@ import static com.cpmanager.service.commonModels.Constants.SIGNING_KEY;
 
 @Component
 public class JwtTokenUtil implements Serializable {
+ @Autowired
+ private final UserService userService;
 
-    public String getUsernameFromToken(String token) {
+    public JwtTokenUtil(UserService userService) {
+        this.userService = userService;
+    }
+
+    public String getEmailFromToken(String token) {
         return getClaimFromToken(token, Claims::getSubject);
     }
 
@@ -46,13 +53,13 @@ public class JwtTokenUtil implements Serializable {
     }
 
     public String generateToken(UserTableModel user) {
-        return doGenerateToken(user.getUsername());
+        return doGenerateToken(user.getEmail(),user.getRole());
     }
 
-    private String doGenerateToken(String subject) {
+    private String doGenerateToken(String subject,String role) {
 
         Claims claims = Jwts.claims().setSubject(subject);
-        claims.put("scopes", Arrays.asList(new SimpleGrantedAuthority("ROLE_ADMIN")));
+        claims.put("scopes", Arrays.asList(new SimpleGrantedAuthority(role)));
 
         return Jwts.builder()
                 .setClaims(claims)
@@ -63,10 +70,11 @@ public class JwtTokenUtil implements Serializable {
                 .compact();
     }
 
-    public Boolean validateToken(String token, UserDetails userDetails) {
-        final String username = getUsernameFromToken(token);
+    public Boolean validateToken(String token) {
+        final String email = getEmailFromToken(token);
+        System.out.println(email+" aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
         return (
-              username.equals(userDetails.getUsername())
+              email.equals(userService.getByEmail(email).getEmail())
                     && !isTokenExpired(token));
     }
 

@@ -60,10 +60,6 @@ public class GarageServiceImpl implements GarageService {
         vehicleRepository.deleteVehicleTableModelByRegPlates(reg_plates);
     }
 
-    @Override
-    public void updateVehicle(VehicleTableModel model) {
-        vehicleRepository.save(model);
-    }
 
     @Override
     public boolean checkForUniqueRegPlates(String reg_plates) {

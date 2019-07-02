@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
 	@Override
 	public UserTableModel save(UserTableModel user) {
-		return null;
+		return userRepository.save(user);
 	}
 
 	public List findAll() {
@@ -68,6 +68,21 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 	@Override
 	public UserTableModel update(UserTableModel userDto) {
 		return null;
+	}
+
+	@Override
+	public boolean findByEmailAndPassword(String email, String password) {
+		return userRepository.existsByEmailAndPassword(email, password);
+	}
+
+	@Override
+	public boolean findByEmail(String email) {
+		return userRepository.existsByEmail(email);
+	}
+
+	@Override
+	public UserTableModel getByEmail(String email) {
+		return userRepository.getUserTableModelByEmail(email);
 	}
 
 

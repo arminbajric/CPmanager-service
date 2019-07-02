@@ -1,6 +1,7 @@
 package com.cpmanager.service.controller;
 
 
+import com.cpmanager.service.commonModels.User;
 import com.cpmanager.service.config.JwtTokenUtil;
 import com.cpmanager.service.commonModels.AuthApiResponse;
 import com.cpmanager.service.commonModels.AuthToken;
@@ -27,13 +28,14 @@ public class AuthenticationController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/generate-token", method = RequestMethod.POST)
-    public AuthApiResponse<AuthToken> register(@RequestBody LoginUser loginUser) throws AuthenticationException {
-
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginUser.getUsername(), loginUser.getPassword()));
-        final UserTableModel user = userService.findOne(loginUser.getUsername());
-        final String token = jwtTokenUtil.generateToken(user);
-        return new AuthApiResponse<>(200, "success",new AuthToken(token, user.getUsername()));
-    }
+    @RequestMapping(value = "/check-token", method = RequestMethod.GET)
+    public AuthApiResponse<User> register(@RequestParam(name = "token") String token) throws AuthenticationException {
+       if(jwtTokenUtil.validateToken(token)) {
+           return new AuthApiResponse<User>(200, true);
+       }
+       else{
+           return new AuthApiResponse<User>(201, false);
+       }
+       }
 
 }

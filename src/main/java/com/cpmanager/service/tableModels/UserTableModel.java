@@ -36,6 +36,26 @@ public class UserTableModel implements Serializable {
     String town;
     @Column(name = "role")
     String role;
+
+    @Override
+    public String toString() {
+        return "UserTableModel{" +
+                "Id=" + Id +
+                ", username='" + username + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", streeet='" + streeet + '\'' +
+                ", street_number=" + street_number +
+                ", town='" + town + '\'' +
+                ", role='" + role + '\'' +
+                ", phone_number='" + phone_number + '\'' +
+                ", requestTableModelSet=" + requestTableModelSet +
+                ", meetingTableModels=" + meetingTableModels +
+                '}';
+    }
+
     @Column(name = "phone_number")
     String phone_number;
     @OneToMany(mappedBy = "userTableModel")

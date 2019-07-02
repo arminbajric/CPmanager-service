@@ -57,7 +57,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         webSecurity
                 .ignoring()
-                .antMatchers(HttpMethod.POST, "/users/add*");
+                .antMatchers(HttpMethod.POST, "/users/add*").antMatchers(HttpMethod.POST,"/users/userAuth*").antMatchers(HttpMethod.GET,"/token/check-token*");
     }
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -65,7 +65,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.
                 authorizeRequests()
-                .antMatchers("/token/*","/users/add*").permitAll()
+                .antMatchers("/token/check-token*","/users/add*","/users/userAuth*").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()

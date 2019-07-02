@@ -1,6 +1,7 @@
 package com.cpmanager.service.controller;
 
 import com.cpmanager.service.commonModels.UniqueStatus;
+import com.cpmanager.service.commonModels.UniqueVehicleStatus;
 import com.cpmanager.service.service.GarageService;
 import com.cpmanager.service.tableModels.VehicleTableModel;
 import org.springframework.http.ResponseEntity;
@@ -53,9 +54,9 @@ public class GarageController {
         return ResponseEntity.status(200).build();
     }
     @RequestMapping(value = "/vehicles/unique{reg_plates}",method = RequestMethod.GET)
-    public UniqueStatus checkRegPlates(@RequestParam String reg_plates){
+    public UniqueVehicleStatus checkRegPlates(@RequestParam String reg_plates){
 
-        UniqueStatus uniqueStatus=new UniqueStatus(200,garageService.checkForUniqueRegPlates(reg_plates));
+        UniqueVehicleStatus uniqueStatus=new UniqueVehicleStatus(200,garageService.checkForUniqueRegPlates(reg_plates));
         return uniqueStatus;
     }
 }

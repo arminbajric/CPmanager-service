@@ -6,9 +6,7 @@ public class UserDto {
     private String firstName;
     private String lastName;
     private String username;
-    private String password;
-    private int age;
-    private int salary;
+
 
     public int getId() {
         return id;
@@ -42,27 +40,5 @@ public class UserDto {
         this.username = username;
     }
 
-    public String getPassword() {
-        return password;
-    }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public int getSalary() {
-        return salary;
-    }
-
-    public void setSalary(int salary) {
-        this.salary = salary;
-    }
 }

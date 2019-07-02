@@ -15,4 +15,7 @@ public interface UserService {
     UserTableModel findById(int id);
 
     UserTableModel update(UserTableModel userDto);
+    boolean findByEmailAndPassword(String email,String password);
+    boolean findByEmail(String email);
+    UserTableModel getByEmail(String email);
 }
